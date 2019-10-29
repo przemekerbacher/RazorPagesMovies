@@ -3,14 +3,16 @@ using Grocery.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Grocery.Migrations
 {
     [DbContext(typeof(GroceryContext))]
-    partial class GroceryContextModelSnapshot : ModelSnapshot
+    [Migration("20191027143823_Add category to Product")]
+    partial class AddcategorytoProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,7 @@ namespace Grocery.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Grocery.Models.Product", b =>
@@ -38,7 +40,7 @@ namespace Grocery.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoriesId");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500);
@@ -57,7 +59,7 @@ namespace Grocery.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("UnitId");
 
@@ -80,9 +82,9 @@ namespace Grocery.Migrations
 
             modelBuilder.Entity("Grocery.Models.Product", b =>
                 {
-                    b.HasOne("Grocery.Models.Category", "Categories")
+                    b.HasOne("Grocery.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoriesId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Grocery.Models.Unit", "Unit")

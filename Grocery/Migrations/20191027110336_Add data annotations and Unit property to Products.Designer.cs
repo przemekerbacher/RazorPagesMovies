@@ -3,14 +3,16 @@ using Grocery.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Grocery.Migrations
 {
     [DbContext(typeof(GroceryContext))]
-    partial class GroceryContextModelSnapshot : ModelSnapshot
+    [Migration("20191027110336_Add data annotations and Unit property to Products")]
+    partial class AdddataannotationsandUnitpropertytoProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,37 +20,21 @@ namespace Grocery.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Grocery.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(10);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("Grocery.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoriesId");
-
                     b.Property<string>("Description")
-                        .HasMaxLength(500);
+                        .HasMaxLength(100);
 
                     b.Property<string>("Image")
                         .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(10);
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
@@ -56,8 +42,6 @@ namespace Grocery.Migrations
                     b.Property<int>("UnitId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoriesId");
 
                     b.HasIndex("UnitId");
 
@@ -80,11 +64,6 @@ namespace Grocery.Migrations
 
             modelBuilder.Entity("Grocery.Models.Product", b =>
                 {
-                    b.HasOne("Grocery.Models.Category", "Categories")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Grocery.Models.Unit", "Unit")
                         .WithMany("Products")
                         .HasForeignKey("UnitId")

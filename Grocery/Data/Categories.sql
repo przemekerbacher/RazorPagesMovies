@@ -1,0 +1,9 @@
+insert into Categories (name) values ('Dairy');
+insert into Categories (name) values ('Meat');
+insert into Categories (name) values ('Fruits');
+insert into Categories (name) values ('Vegetables');
+insert into Categories (name) values ('Fishes');
+insert into Categories (name) values ('Breadstuff');
+insert into Categories (name) values ('Groceries');
+insert into Categories (name) values ('Chemics');
+insert into Categories (name) values ('Sweets');
