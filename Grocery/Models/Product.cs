@@ -29,5 +29,7 @@ namespace Grocery.Models
 
         [Required]
         public Category Categories { get; set; }
+
+        public DiscountedProduct DiscountedProduct { get; set; }
     }
 }

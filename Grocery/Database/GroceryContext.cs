@@ -11,7 +11,9 @@ namespace Grocery.Database
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Product> DiscountedProducts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Grocery.Models.DiscountedProduct> DiscountedProduct { get; set; }
     }
 }
